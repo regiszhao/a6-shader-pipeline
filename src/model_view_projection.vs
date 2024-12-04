@@ -25,6 +25,12 @@ void main()
 {
   /////////////////////////////////////////////////////////////////////////////
   // Replace with your code 
-  pos_cs_in = vec4(pos_vs_in,1.0);
+  if (is_moon) {
+	mat4 M = model(is_moon, animation_seconds);
+	pos_cs_in = proj * view * M * vec4(pos_vs_in, 1.0);
+  }
+  else {
+	pos_cs_in = proj * view * vec4(pos_vs_in, 1.0);
+  }
   /////////////////////////////////////////////////////////////////////////////
 }

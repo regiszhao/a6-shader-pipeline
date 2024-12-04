@@ -11,6 +11,15 @@ mat4 model(bool is_moon, float time)
 {
   /////////////////////////////////////////////////////////////////////////////
   // Replace with your code 
-  return identity();
+  if (is_moon) {
+	float theta = 0.5 * M_PI * time; // 2 pi radians per 4 sec
+	mat4 R = rotate_about_y(theta); // rotation matrix
+	mat4 S = uniform_scale(0.3); // scale matrix to 0.3 (70% smaller)
+	mat4 T = translate(vec3(2, 0, 0)); // shift away from origin by 2 units
+	return R * T * S; // first apply scale and translation, then rotate
+  }
+  else {
+	return identity();
+  }
   /////////////////////////////////////////////////////////////////////////////
 }

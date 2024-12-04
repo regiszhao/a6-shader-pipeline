@@ -9,7 +9,15 @@
 float bump_height( bool is_moon, vec3 s)
 {
   /////////////////////////////////////////////////////////////////////////////
-  // Replace with your code 
-  return 0 ;
+  float noise_value = improved_perlin_noise(s * 3);
+  
+  // adjust noise value based on moon or planet
+  if (is_moon) {
+	noise_value *= 0.9;
+  } else {
+	noise_value *= 1;
+  }
+
+  return 0.1 * smooth_heaviside(noise_value, 7);
   /////////////////////////////////////////////////////////////////////////////
 }

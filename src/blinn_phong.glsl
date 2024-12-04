@@ -21,8 +21,16 @@ vec3 blinn_phong(
   vec3 l)
 {
   /////////////////////////////////////////////////////////////////////////////
-  // Replace with your code 
-  return vec3(1,1,1);
+
+  // calculate diffuse contribution
+  vec3 diffuse = kd * max(0, dot(n, l));
+
+  // calculate specular contribution
+  vec3 h = normalize(v + l);
+  float n_dot_h_phong = pow(max(0.0, dot(n, h)), p);
+  vec3 specular = ks * n_dot_h_phong;
+
+  return ka + diffuse + specular;
   /////////////////////////////////////////////////////////////////////////////
 }
 
